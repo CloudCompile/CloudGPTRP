@@ -1,13 +1,13 @@
 <h1 style="border-bottom: none" align="center">
-  <a href="https://narratium-ai-rust.vercel.app/">Narratium.ai</a>
+  <a href="https://narratium-ai-rust.vercel.app/">CloudGPT RP</a>
   <br />
   <p>创建、游玩和与AI角色扮演</p>
 </h1>
 
 <div align="center">
   <blockquote>
-    <em><strong>世界广阔无垠，让想象力引领前行，但人心永远不可直视</strong></em><br>
-    <em><strong>The world is vast, let imagination lead, but human hearts remain forever inscrutable</strong></em>
+    <em><strong>体验 AI 驱动的角色扮演，包含图像生成和角色创建</strong></em><br>
+    <em><strong>Experience AI-powered roleplay with image generation and character creation</strong></em>
   </blockquote>
 </div>
 
@@ -20,12 +20,12 @@
 
 <br>
 
-![Narratium.ai](https://raw.githubusercontent.com/Narratium/Narratium.ai/main/public/banner.png)
+![CloudGPT RP](https://raw.githubusercontent.com/Narratium/Narratium.ai/main/public/banner.png)
 
 <p align="center">
-  <em>一个开源的AI角色平台，用于构建、定制和与虚拟角色聊天</em>
+  <em>一个开源的AI角色扮演平台，用于构建、定制和与虚拟角色聊天</em>
   <br>
-  <em>为构建互动世界的作家、开发者和故事讲述者而设计</em>
+  <em>集成图像生成功能，用于角色和对话</em>
 </p>
 
 <div align="center">
@@ -47,7 +47,7 @@
 </div>
 
 <div align="center">
-  <em><strong>角色、世界和对话 — 在Narratium中完美统一</strong></em>
+  <em><strong>角色、对话和图像 — 在CloudGPT RP中完美统一</strong></em>
 </div>
 
 <br>
