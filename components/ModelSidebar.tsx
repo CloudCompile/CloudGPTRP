@@ -1226,7 +1226,7 @@ export default function ModelSidebar({ isOpen, toggleSidebar }: ModelSidebarProp
             <div className="border border-[#534741] rounded-md p-2.5 sm:p-2.5 p-2 mb-3 sm:mb-3 mb-2 bg-[#1c1c1c] bg-opacity-50 backdrop-blur-sm">
               <div className="mb-1.5 sm:mb-1.5 mb-1">
                 <span className="text-xs sm:text-xs text-[10px] text-[#8a8a8a]">{t("modelSettings.llmType") || "API Type"}:</span>
-                <span className="ml-2 text-xs sm:text-xs text-[10px] text-[#f4e8c1]">{llmType === "openai" ? "OpenAI API" : "Ollama API"}</span>
+                <span className="ml-2 text-xs sm:text-xs text-[10px] text-[#f4e8c1]">{llmType === "openai" ? "CloudGPT API" : "Ollama API"}</span>
               </div>
               <div className="mb-1.5 sm:mb-1.5 mb-1">
                 <span className="text-xs sm:text-xs text-[10px] text-[#8a8a8a]">{t("modelSettings.baseUrl") || "Base URL"}:</span>
