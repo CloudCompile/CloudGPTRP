@@ -25,6 +25,7 @@ import { useLanguage } from "@/app/i18n";
 import { motion, AnimatePresence } from "framer-motion";
 import { trackButtonClick } from "@/utils/google-analytics";
 import { Toast } from "@/components/Toast";
+import ImageGenerationModal from "@/components/ImageGenerationModal";
 
 /**
  * Interface definitions for the component's props
@@ -63,6 +64,7 @@ const CreateCharacterModal: React.FC<CreateCharacterModalProps> = ({
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [avatarPreview, setAvatarPreview] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isImageGenModalOpen, setIsImageGenModalOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Add Toast state
@@ -120,6 +122,19 @@ const CreateCharacterModal: React.FC<CreateCharacterModalProps> = ({
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleImageGenerated = (imageFile: File) => {
+    setAvatarFile(imageFile);
+    
+    // Create preview
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setAvatarPreview(reader.result as string);
+    };
+    reader.readAsDataURL(imageFile);
+    
+    showToast("Avatar generated successfully!", "success");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -249,8 +264,11 @@ const CreateCharacterModal: React.FC<CreateCharacterModalProps> = ({
                 </button>
                 <button
                   type="button"
-                  className="px-4 py-2 bg-[#252220] hover:bg-[#342f25] text-[#f4e8c1] rounded border border-[#534741] transition-colors"
-                  title="Image generation coming soon"
+                  onClick={() => {
+                    trackButtonClick("generate_avatar_btn");
+                    setIsImageGenModalOpen(true);
+                  }}
+                  className="px-4 py-2 bg-[#f9c86d] hover:bg-[#f4d68f] text-[#1a1410] font-semibold rounded transition-colors"
                 >
                   Generate Avatar
                 </button>
@@ -377,6 +395,14 @@ const CreateCharacterModal: React.FC<CreateCharacterModalProps> = ({
             onClose={hideToast}
           />
         </motion.div>
+        
+        <ImageGenerationModal
+          isOpen={isImageGenModalOpen}
+          onClose={() => setIsImageGenModalOpen(false)}
+          onImageGenerated={handleImageGenerated}
+          suggestedPrompt={name && description ? `${description} - character portrait` : ""}
+          title="Generate Character Avatar"
+        />
       </motion.div>
     </AnimatePresence>
   );
