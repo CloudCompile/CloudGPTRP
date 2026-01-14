@@ -1,13 +1,13 @@
 <h1 style="border-bottom: none" align="center">
-  <a href=https://narratium-ai-rust.vercel.app/">Narratium.ai</a>
+  <a href="https://narratium-ai-rust.vercel.app/">CloudGPT RP</a>
   <br />
   <p>Create, Play, and Roleplay with AI</p>
 </h1>
 
 <div align="center">
   <blockquote>
-    <em><strong>The world is vast, let imagination lead, but human hearts remain forever inscrutable</strong></em><br>
-    <em><strong>世界广阔无垠，让想象力引领前行，但人心永远不可直视</strong></em>
+    <em><strong>Experience AI-powered roleplay with image generation and character creation</strong></em><br>
+    <em><strong>体验 AI 驱动的角色扮演，包含图像生成和角色创建</strong></em>
   </blockquote>
 </div>
 
@@ -20,12 +20,12 @@
 
 <br>
 
-![Narratium.ai](/public/banner.png)
+![CloudGPT RP](/public/banner.png)
 
 <p align="center">
-  <em>An open-source AI character platform to build, customize, and chat with virtual personas</em>
+  <em>An open-source AI roleplay platform to build, customize, and chat with virtual personas</em>
   <br>
-  <em>For writers, developers, and storytellers building interactive worlds</em>
+  <em>With integrated image generation for characters and conversations</em>
 </p>
 
 <div align="center">
@@ -48,7 +48,7 @@
 </div>
 
 <div align="center">
-  <em><strong>Characters, worlds, and conversations — beautifully unified in Narratium</strong></em>
+  <em><strong>Characters, conversations, and images — beautifully unified in CloudGPT RP</strong></em>
 </div>
 
 <br>
@@ -65,10 +65,10 @@
 
 <img src="https://raw.githubusercontent.com/Narratium/Narratium.ai/main/assets/welcome_star.gif" style="width: 100%" />
 
-| What is Narratium |
+| What is CloudGPT RP |
 | :---------------- |
 
-[Narratium.ai](https://narratium-ai-rust.vercel.app/) is an open-source platform for creating AI characters, immersive worlds, and dynamic conversations.It's your creative studio for building personalized roleplay adventures — from emotional journeys to epic sagas.
+CloudGPT RP is an open-source platform for creating AI characters, immersive roleplay, and dynamic conversations. It's your creative studio for building personalized roleplay adventures with integrated image generation capabilities — from character portraits to conversation visuals.
 
 | Experience & Play |
 | :---------------- |
@@ -96,7 +96,9 @@ For Download Version: please refer to the [Download for Mac, Windows, Linux](htt
 | Features |
 | :------- |
 
-- **Immersive Adventure Mode**: Create personalized worlds and make decisions that matter.
+- **Create Characters from Scratch**: Build custom characters with detailed personalities and scenarios.
+- **AI-Powered Image Generation**: Generate character portraits and conversation images using CloudGPT API.
+- **Immersive Roleplay Mode**: Create personalized worlds and make decisions that matter.
 - **Visual Memory Management**: React Flow-powered session tracing and branching.
 - **Character Cards & Lore**: Compatible with SillyTavern cards, manage everything in one place.
 - **Powerful Plugin System**: Supports a rich plugin ecosystem, extensible features, and custom UI components. See [Plugin Development Guide](./public/plugins/HOW_TO_ADD_PLUGINS.md) for details.
@@ -111,13 +113,13 @@ For Download Version: please refer to the [Download for Mac, Windows, Linux](htt
 
 **NSFW Content**: This application supports NSFW content generation when users provide explicit consent (18+ only).
 
-| Narratium vs. Other AI Roleplay Platforms |
+| CloudGPT RP vs. Other AI Roleplay Platforms |
 | :---------------------------------------- |
 
 <table style="width: 100%;">
   <tr>
     <th align="center">Feature</th>
-    <th align="center">Narratium.ai</th>
+    <th align="center">CloudGPT RP</th>
     <th align="center">SillyTavern</th>
     <th align="center">AI Dungeon</th>
     <th align="center">fount</th>
@@ -127,6 +129,20 @@ For Download Version: please refer to the [Download for Mac, Windows, Linux](htt
     <td align="center">✅</td>
     <td align="center">✅</td>
     <td align="center">❌</td>
+    <td align="center">❌</td>
+  </tr>
+  <tr>
+    <td><strong>Character Creation from Scratch</strong></td>
+    <td align="center">✅</td>
+    <td align="center">❌ (import only)</td>
+    <td align="center">❌</td>
+    <td align="center">❌</td>
+  </tr>
+  <tr>
+    <td><strong>AI Image Generation</strong></td>
+    <td align="center">✅</td>
+    <td align="center">❌</td>
+    <td align="center">⚠️ (limited)</td>
     <td align="center">❌</td>
   </tr>
   <tr>

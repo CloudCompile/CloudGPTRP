@@ -93,7 +93,7 @@ export default function HomeContent() {
         className="text-center max-w-2xl px-4 relative z-20"
       >
         <h1 className="text-5xl font-cinzel mb-6 bg-clip-text text-transparent bg-gradient-to-r from-amber-500 via-orange-400 to-yellow-300 drop-shadow-[0_0_10px_rgba(251,146,60,0.5)]">
-        Narratium
+        CloudGPT RP
         </h1>
         <p
           className={`text-xl mb-12 tracking-wide ${serifFontClass}`}

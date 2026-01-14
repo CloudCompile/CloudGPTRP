@@ -1,7 +1,7 @@
 {
-  "name": "Narratium.ai",
-  "short_name": "Narratium",
-  "description": "AI-powered storytelling and character creation platform",
+  "name": "CloudGPT RP",
+  "short_name": "CloudGPT RP",
+  "description": "AI-powered roleplay and character creation platform with image generation",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

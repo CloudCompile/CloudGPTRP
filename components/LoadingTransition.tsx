@@ -362,7 +362,7 @@ export default function LoadingTransition({
           ref={logoRef}
           src="/logo-narratium.png" 
           className="logo" 
-          alt="Narratium Logo"
+          alt="CloudGPT RP Logo"
           style={{
             position: "absolute",
             width: "min(10rem, 25vw)",

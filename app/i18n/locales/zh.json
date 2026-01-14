@@ -912,8 +912,8 @@
     }
   },
   "tour": {
-    "welcome": "欢迎使用 Narratium",
-    "welcomeDescription": "Narratium 是一个智能角色对话平台，您可以与各种AI角色进行深度对话，创造独特的故事体验。让我们先了解一下基本功能。",
+    "welcome": "欢迎使用 CloudGPT RP",
+    "welcomeDescription": "CloudGPT RP 是一个智能 AI 角色扮演平台，您可以创建角色、与 AI 进行深度对话，并生成图像。让我们先了解一下基本功能。",
     "loginTitle": "首先登录账户",
     "loginDescription": "点击这里登录。请注意：您输入的用户名可能会被AI角色用作主角名称，所以建议使用您希望在故事中使用的名字。",
     "settingsTitle": "配置AI模型",
@@ -957,8 +957,8 @@
     "items": "项"
   },
   "appDownload": {
-    "title": "下载 Narratium",
-    "subtitle": "选择您的平台下载 Narratium 应用：",
+    "title": "下载 CloudGPT RP",
+    "subtitle": "选择您的平台下载 CloudGPT RP 应用：",
     "platforms": {
       "ios": "iOS",
       "android": "Android", 
