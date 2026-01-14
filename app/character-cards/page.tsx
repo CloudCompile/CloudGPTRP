@@ -416,7 +416,7 @@ export default function CharacterCards() {
                     damping: 10, 
                   }}
                   onClick={() => {
-                    trackButtonClick("create_character_btn");
+                    trackButtonClick("create_character_btn", "Create Character");
                     setIsCreateModalOpen(true);
                   }}
                 >

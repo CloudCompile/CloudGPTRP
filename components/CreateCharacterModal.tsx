@@ -154,7 +154,7 @@ const CreateCharacterModal: React.FC<CreateCharacterModalProps> = ({
     setIsLoading(true);
     
     try {
-      trackButtonClick("create_character_submit");
+      trackButtonClick("create_character_submit", "Submit Create Character");
       
       // Create character data
       const characterId = `char_${Date.now()}`;
@@ -265,7 +265,7 @@ const CreateCharacterModal: React.FC<CreateCharacterModalProps> = ({
                 <button
                   type="button"
                   onClick={() => {
-                    trackButtonClick("generate_avatar_btn");
+                    trackButtonClick("generate_avatar_btn", "Generate Avatar");
                     setIsImageGenModalOpen(true);
                   }}
                   className="px-4 py-2 bg-[#f9c86d] hover:bg-[#f4d68f] text-[#1a1410] font-semibold rounded transition-colors"
