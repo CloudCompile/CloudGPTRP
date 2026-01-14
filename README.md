@@ -30,8 +30,8 @@
 
 <div align="center">
   <a href="https://narratium-ai-rust.vercel.app">🔗 Live Demo</a> &nbsp;|&nbsp;
-  <a href="https://deepwiki.com/Narratium/Narratium.ai/">📖 DeepWiki Docs</a> &nbsp;|&nbsp;
-    <a href="https://github.com/Narratium/Narratium.ai/releases">💾 Download</a> &nbsp;|&nbsp;
+  <a href="https://deepwiki.com/CloudGPT-RP/CloudGPT-RP/">📖 DeepWiki Docs</a> &nbsp;|&nbsp;
+    <a href="https://github.com/CloudCompile/CloudGPTRP/releases">💾 Download</a> &nbsp;|&nbsp;
   <a href="./README_ZH.md">🇨🇳 中文文档</a>
 </div>
 
@@ -39,11 +39,11 @@
 
 <div align="center">
 
-![GitHub stars](https://img.shields.io/github/stars/Narratium/Narratium.ai?style=social)
-![GitHub forks](https://img.shields.io/github/forks/Narratium/Narratium.ai?style=social)
-![GitHub closed PRs](https://img.shields.io/github/issues-pr-closed/Narratium/Narratium.ai)
-![GitHub commits](https://img.shields.io/github/commit-activity/m/Narratium/Narratium.ai)
-![GitHub Downloads](https://img.shields.io/github/downloads/Narratium/Narratium.ai/total)
+![GitHub stars](https://img.shields.io/github/stars/CloudCompile/CloudGPTRP?style=social)
+![GitHub forks](https://img.shields.io/github/forks/CloudCompile/CloudGPTRP?style=social)
+![GitHub closed PRs](https://img.shields.io/github/issues-pr-closed/CloudCompile/CloudGPTRP)
+![GitHub commits](https://img.shields.io/github/commit-activity/m/CloudCompile/CloudGPTRP)
+![GitHub Downloads](https://img.shields.io/github/downloads/CloudCompile/CloudGPTRP/total)
 
 </div>
 
@@ -53,7 +53,7 @@
 
 <br>
 
-<img src="https://raw.githubusercontent.com/Narratium/Narratium.ai/main/assets/demo_show.gif" style="width: 100%"/>
+<img src="https://raw.githubusercontent.com/CloudCompile/CloudGPTRP/main/assets/demo_show.gif" style="width: 100%"/>
 
 ## Getting started & staying tuned with us
 
@@ -63,7 +63,7 @@
 
 <br>
 
-<img src="https://raw.githubusercontent.com/Narratium/Narratium.ai/main/assets/welcome_star.gif" style="width: 100%" />
+<img src="https://raw.githubusercontent.com/CloudCompile/CloudGPTRP/main/assets/welcome_star.gif" style="width: 100%" />
 
 | What is CloudGPT RP |
 | :---------------- |
@@ -91,7 +91,7 @@ For detailed installation and setup instructions, please refer to our [Getting S
 
 For detailed Vercel deployment instructions, please refer to the [Vercel Deployment Guide](./docs/VERCEL_DEPLOYMENT.md).
 
-For Download Version: please refer to the [Download for Mac, Windows, Linux](https://github.com/Narratium/Narratium.ai/releases).
+For Download Version: please refer to the [Download for Mac, Windows, Linux](https://github.com/CloudCompile/CloudGPTRP/releases).
 
 | Features |
 | :------- |
@@ -203,14 +203,14 @@ This project consists of two distinct parts with independent licenses:
 
 - 🔐 Code: AGPL-3.0 License — copyleft license requiring source code disclosure for network services, with mandatory GitHub attribution.
 - 🔒 Content: CC BY-NC-SA 4.0 — non-commercial use only, with attribution and same-license sharing required.
-- 🌐 Web Deployment: Must display visible link to https://github.com/Narratium/Narratium.ai
+- 🌐 Web Deployment: Must display visible link to https://github.com/CloudCompile/CloudGPTRP
 
 > For full license details, please refer to the [LICENSE](./LICENSE).
 
 | Code Contributer |
 | :--------------- |
 
-[![Contributors](https://contrib.rocks/image?repo=Narratium/Narratium.ai)](https://github.com/Narratium/Narratium.ai/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=CloudCompile/CloudGPTRP)](https://github.com/CloudCompile/CloudGPTRP/graphs/contributors)
 
 | Others |
 | :----- |
@@ -220,5 +220,5 @@ Thanks all Official Website Test API Sponsor
 | Star Growth |
 | :---------- |
 
-[![Stargazers over time](https://starchart.cc/Narratium/Narratium.ai.svg?variant=adaptive)](https://starchart.cc/Narratium/Narratium.ai)
+[![Stargazers over time](https://starchart.cc/CloudCompile/CloudGPTRP.svg?variant=adaptive)](https://starchart.cc/CloudCompile/CloudGPTRP)
 

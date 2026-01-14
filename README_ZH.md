@@ -20,7 +20,7 @@
 
 <br>
 
-![CloudGPT RP](https://raw.githubusercontent.com/Narratium/Narratium.ai/main/public/banner.png)
+![CloudGPT RP](https://raw.githubusercontent.com/CloudCompile/CloudGPTRP/main/public/banner.png)
 
 <p align="center">
   <em>一个开源的AI角色扮演平台，用于构建、定制和与虚拟角色聊天</em>
@@ -29,8 +29,8 @@
 </p>
 
 <div align="center">
-  <a href="https://deepwiki.com/Narratium/Narratium.ai/">📖 DeepWiki Docs</a> &nbsp;|&nbsp;
-    <a href="https://github.com/Narratium/Narratium.ai/releases">💾 Download</a> &nbsp;|&nbsp;
+  <a href="https://deepwiki.com/CloudGPT-RP/CloudGPT-RP/">📖 DeepWiki Docs</a> &nbsp;|&nbsp;
+    <a href="https://github.com/CloudCompile/CloudGPTRP/releases">💾 Download</a> &nbsp;|&nbsp;
   <a href="./README_ZH.md">🇨🇳 中文文档</a>
 </div>
 
@@ -38,11 +38,11 @@
 
 <div align="center">
 
-![GitHub stars](https://img.shields.io/github/stars/Narratium/Narratium.ai?style=social)
-![GitHub forks](https://img.shields.io/github/forks/Narratium/Narratium.ai?style=social)
-![GitHub closed PRs](https://img.shields.io/github/issues-pr-closed/Narratium/Narratium.ai)
-![GitHub commits](https://img.shields.io/github/commit-activity/m/Narratium/Narratium.ai)
-![GitHub Downloads](https://img.shields.io/github/downloads/Narratium/Narratium.ai/total)
+![GitHub stars](https://img.shields.io/github/stars/CloudCompile/CloudGPTRP?style=social)
+![GitHub forks](https://img.shields.io/github/forks/CloudCompile/CloudGPTRP?style=social)
+![GitHub closed PRs](https://img.shields.io/github/issues-pr-closed/CloudCompile/CloudGPTRP)
+![GitHub commits](https://img.shields.io/github/commit-activity/m/CloudCompile/CloudGPTRP)
+![GitHub Downloads](https://img.shields.io/github/downloads/CloudCompile/CloudGPTRP/total)
 
 </div>
 
@@ -52,7 +52,7 @@
 
 <br>
 
-<img src="https://raw.githubusercontent.com/Narratium/Narratium.ai/main/assets/demo_show.gif" style="width: 100%"/>
+<img src="https://raw.githubusercontent.com/CloudCompile/CloudGPTRP/main/assets/demo_show.gif" style="width: 100%"/>
 
 ## 开始使用并关注我们
 
@@ -62,7 +62,7 @@
 
 <br>
 
-<img src="https://raw.githubusercontent.com/Narratium/Narratium.ai/main/assets/welcome_star.gif" style="width: 100%" />
+<img src="https://raw.githubusercontent.com/CloudCompile/CloudGPTRP/main/assets/welcome_star.gif" style="width: 100%" />
 
 | 什么是Narratium |
 | :---------------- |
