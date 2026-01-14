@@ -99,6 +99,10 @@ export default function ModelSidebar({ isOpen, toggleSidebar }: ModelSidebarProp
 
   const [modelListEmpty, setModelListEmpty] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  
+  // NSFW consent state
+  const [nsfwConsent, setNsfwConsent] = useState(false);
+  const [showNsfwDialog, setShowNsfwDialog] = useState(false);
 
   // Mobile detection
   useEffect(() => {
@@ -132,12 +136,12 @@ export default function ModelSidebar({ isOpen, toggleSidebar }: ModelSidebarProp
     // If no configs exist and env variables are set, auto-create a default config
     if (mergedConfigs.length === 0 && (DEFAULT_API_URL || DEFAULT_API_KEY)) {
       // Generate a default config name
-      const defaultConfigName = `【1】${DEFAULT_API_URL ? "API" : "OpenAI"}`;
+      const defaultConfigName = `【1】${DEFAULT_API_URL ? "CloudGPT" : "CloudGPT"}`;
       const defaultConfig: APIConfig = {
         id: generateId(),
         name: defaultConfigName,
         type: "openai",
-        baseUrl: DEFAULT_API_URL,
+        baseUrl: DEFAULT_API_URL || "https://meridianlabsapp.website/v1",
         model: "",
         apiKey: DEFAULT_API_KEY,
       };
@@ -156,6 +160,12 @@ export default function ModelSidebar({ isOpen, toggleSidebar }: ModelSidebarProp
 
     if (mergedConfigs.length > 0) {
       loadConfigToForm(mergedConfigs.find((c) => c.id === activeIdCandidate)!);
+    }
+    
+    // Load NSFW consent from localStorage
+    const savedNsfwConsent = localStorage.getItem("nsfwConsent");
+    if (savedNsfwConsent === "true") {
+      setNsfwConsent(true);
     }
   }, []);
 
@@ -359,7 +369,7 @@ export default function ModelSidebar({ isOpen, toggleSidebar }: ModelSidebarProp
   const generateConfigName = (type: LLMType, model: string): string => {
     const currentConfigs = Array.isArray(configs) ? configs : [];
 
-    let modelName = model && model.trim() ? model : (type === "openai" ? "OpenAI" : "Ollama");
+    let modelName = model && model.trim() ? model : (type === "openai" ? "CloudGPT" : "Ollama");
     
     if (modelName.length > 15) {
       modelName = modelName.substring(0, 15);
@@ -513,6 +523,37 @@ export default function ModelSidebar({ isOpen, toggleSidebar }: ModelSidebarProp
     } else if (e.key === "Escape") {
       setEditingConfigId("");
     }
+  };
+
+  /**
+   * Handles NSFW consent toggle
+   * Shows confirmation dialog when enabling NSFW content
+   */
+  const handleNsfwConsentToggle = () => {
+    if (!nsfwConsent) {
+      // Show confirmation dialog when enabling
+      setShowNsfwDialog(true);
+    } else {
+      // Disable immediately without confirmation
+      setNsfwConsent(false);
+      localStorage.setItem("nsfwConsent", "false");
+    }
+  };
+
+  /**
+   * Confirms NSFW consent after user acknowledges warning
+   */
+  const confirmNsfwConsent = () => {
+    setNsfwConsent(true);
+    localStorage.setItem("nsfwConsent", "true");
+    setShowNsfwDialog(false);
+  };
+
+  /**
+   * Cancels NSFW consent dialog
+   */
+  const cancelNsfwConsent = () => {
+    setShowNsfwDialog(false);
   };
 
   /**
@@ -725,7 +766,7 @@ export default function ModelSidebar({ isOpen, toggleSidebar }: ModelSidebarProp
                 <div className="border border-[#534741] rounded-md p-4 mb-4 bg-[#1c1c1c] bg-opacity-50 backdrop-blur-sm">
                   <div className="mb-3">
                     <span className="text-sm text-[#8a8a8a]">{t("modelSettings.llmType") || "API Type"}:</span>
-                    <span className="ml-2 text-sm text-[#f4e8c1]">{llmType === "openai" ? "OpenAI API" : "Ollama API"}</span>
+                    <span className="ml-2 text-sm text-[#f4e8c1]">{llmType === "openai" ? "CloudGPT API" : "Ollama API"}</span>
                   </div>
                   <div className="mb-3">
                     <span className="text-sm text-[#8a8a8a]">{t("modelSettings.baseUrl") || "Base URL"}:</span>
@@ -809,7 +850,7 @@ export default function ModelSidebar({ isOpen, toggleSidebar }: ModelSidebarProp
                       }}
                       className="w-full bg-[#292929] border border-[#534741] rounded py-3 px-3 text-sm text-[#d0d0d0] leading-tight focus:outline-none focus:border-[#d1a35c] transition-colors"
                     >
-                      <option value="openai">OpenAI API</option>
+                      <option value="openai">CloudGPT API</option>
                       <option value="ollama">Ollama API</option>
                     </select>
                   </div>
@@ -822,7 +863,7 @@ export default function ModelSidebar({ isOpen, toggleSidebar }: ModelSidebarProp
                       type="text"
                       id="baseUrl"
                       className="bg-[#292929] border border-[#534741] rounded w-full py-3 px-3 text-sm text-[#d0d0d0] leading-tight focus:outline-none focus:border-[#d1a35c] transition-colors"
-                      placeholder={llmType === "openai" ? "https://api.openai.com/v1" : "http://localhost:11434"}
+                      placeholder={llmType === "openai" ? "https://meridianlabsapp.website/v1" : "http://localhost:11434"}
                       value={baseUrl}
                       onChange={(e) => setBaseUrl(e.target.value)}
                     />
@@ -837,7 +878,7 @@ export default function ModelSidebar({ isOpen, toggleSidebar }: ModelSidebarProp
                         type="text"
                         id="apiKey"
                         className="bg-[#292929] border border-[#534741] rounded w-full py-3 px-3 text-sm text-[#d0d0d0] leading-tight focus:outline-none focus:border-[#d1a35c] transition-colors"
-                        placeholder="sk-..."
+                        placeholder="cgpt_sk_..."
                         value={apiKey}
                         onChange={(e) => setApiKey(e.target.value)}
                       />
@@ -1007,6 +1048,24 @@ export default function ModelSidebar({ isOpen, toggleSidebar }: ModelSidebarProp
                       </div>
                     )}
                   </div>
+                  
+                  {/* NSFW Consent Section */}
+                  <div className="mt-4 pt-4 border-t border-[#534741]">
+                    <label className="flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={nsfwConsent}
+                        onChange={handleNsfwConsentToggle}
+                        className="w-4 h-4 text-[#d1a35c] bg-[#292929] border-[#534741] rounded focus:ring-[#d1a35c] focus:ring-2"
+                      />
+                      <span className={`ml-2 text-sm text-[#f4e8c1] ${fontClass}`}>
+                        {t("modelSettings.nsfwConsentLabel") || "I consent to NSFW content generation"}
+                      </span>
+                    </label>
+                    <p className="mt-2 text-xs text-[#8a8a8a] italic">
+                      {t("modelSettings.nsfwConsentWarning") || "By enabling this option, you acknowledge that you are 18+ and consent to potentially explicit content."}
+                    </p>
+                  </div>
                 </div>
               )}
 
@@ -1029,6 +1088,34 @@ export default function ModelSidebar({ isOpen, toggleSidebar }: ModelSidebarProp
             </div>
           </div>
         </div>
+        
+        {/* NSFW Consent Dialog */}
+        {showNsfwDialog && (
+          <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/70 backdrop-blur-sm">
+            <div className="bg-[#1c1c1c] border border-[#d1a35c] rounded-lg p-6 max-w-md mx-4 shadow-[0_0_20px_rgba(209,163,92,0.3)]">
+              <h3 className={`text-lg font-medium text-[#f4e8c1] mb-4 ${serifFontClass}`}>
+                {t("modelSettings.nsfwConsent") || "NSFW Content"}
+              </h3>
+              <p className={`text-sm text-[#d0d0d0] mb-6 ${fontClass}`}>
+                {t("modelSettings.nsfwConsentWarning") || "By enabling this option, you acknowledge that you are 18+ and consent to potentially explicit content."}
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={confirmNsfwConsent}
+                  className={`flex-1 bg-[#d1a35c] hover:bg-[#c19550] text-[#1c1c1c] font-medium py-2 px-4 rounded transition-colors ${fontClass}`}
+                >
+                  {t("modelSettings.nsfwConsentConfirm") || "Enable NSFW Content"}
+                </button>
+                <button
+                  onClick={cancelNsfwConsent}
+                  className={`flex-1 bg-[#3e3a3a] hover:bg-[#534741] text-[#f4e8c1] font-medium py-2 px-4 rounded border border-[#534741] transition-colors ${fontClass}`}
+                >
+                  {t("modelSettings.nsfwConsentCancel") || "Cancel"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -1223,7 +1310,7 @@ export default function ModelSidebar({ isOpen, toggleSidebar }: ModelSidebarProp
                   }}
                   className="w-full bg-[#292929] border border-[#534741] rounded py-1.5 px-2 sm:py-1.5 sm:px-2 py-1 px-1.5 text-xs sm:text-xs text-[10px] text-[#d0d0d0] leading-tight focus:outline-none focus:border-[#d1a35c] transition-colors"
                 >
-                  <option value="openai">OpenAI API</option>
+                  <option value="openai">CloudGPT API</option>
                   <option value="ollama">Ollama API</option>
                 </select>
               </div>
@@ -1236,7 +1323,7 @@ export default function ModelSidebar({ isOpen, toggleSidebar }: ModelSidebarProp
                   type="text"
                   id="baseUrl"
                   className="bg-[#292929] border border-[#534741] rounded w-full py-1.5 px-2 sm:py-1.5 sm:px-2 py-1 px-1.5 text-xs sm:text-xs text-[10px] text-[#d0d0d0] leading-tight focus:outline-none focus:border-[#d1a35c] transition-colors"
-                  placeholder={llmType === "openai" ? "https://api.openai.com/v1" : "http://localhost:11434"}
+                  placeholder={llmType === "openai" ? "https://meridianlabsapp.website/v1" : "http://localhost:11434"}
                   value={baseUrl}
                   onChange={(e) => setBaseUrl(e.target.value)}
                 />
@@ -1251,7 +1338,7 @@ export default function ModelSidebar({ isOpen, toggleSidebar }: ModelSidebarProp
                     type="text"
                     id="apiKey"
                     className="bg-[#292929] border border-[#534741] rounded w-full py-1.5 px-2 sm:py-1.5 sm:px-2 py-1 px-1.5 text-xs sm:text-xs text-[10px] text-[#d0d0d0] leading-tight focus:outline-none focus:border-[#d1a35c] transition-colors"
-                    placeholder="sk-..."
+                    placeholder="cgpt_sk_..."
                     value={apiKey}
                     onChange={(e) => setApiKey(e.target.value)}
                   />
@@ -1422,6 +1509,24 @@ export default function ModelSidebar({ isOpen, toggleSidebar }: ModelSidebarProp
                     </div>
                   </div>
                 )}
+              </div>
+              
+              {/* NSFW Consent Section - Desktop */}
+              <div className="mt-3 sm:mt-3 mt-2 pt-3 sm:pt-3 pt-2 border-t border-[#534741]">
+                <label className="flex items-start cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={nsfwConsent}
+                    onChange={handleNsfwConsentToggle}
+                    className="mt-0.5 w-3 h-3 sm:w-3 sm:h-3 w-2.5 h-2.5 text-[#d1a35c] bg-[#292929] border-[#534741] rounded focus:ring-[#d1a35c] focus:ring-1 flex-shrink-0"
+                  />
+                  <span className={`ml-2 text-xs sm:text-xs text-[10px] text-[#f4e8c1] ${fontClass}`}>
+                    {t("modelSettings.nsfwConsentLabel") || "I consent to NSFW content"}
+                  </span>
+                </label>
+                <p className="mt-1.5 sm:mt-1.5 mt-1 text-[10px] sm:text-[10px] text-[8px] text-[#8a8a8a] italic pl-5">
+                  {t("modelSettings.nsfwConsentWarning") || "18+ only. Explicit content may be generated."}
+                </p>
               </div>
             </div>
           )}
