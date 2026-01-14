@@ -22,11 +22,14 @@ Click the button below to deploy Narratium.ai to Vercel with one click:
    - Build Command: `pnpm build` (or leave default)
    - Output Directory: `.next` (default)
 
-4. **Environment Variables** (if needed)
+4. **Environment Variables** (Required for CloudGPT API)
    - Add environment variables in your Vercel project's settings.
-   - If you want to allow friends to use your application without needing to enter their own API key, you'll need to configure a server-side API key.
-   - Refer to the `.env.example` file in the project root, and add `NEXT_PUBLIC_API_KEY` and `NEXT_PUBLIC_API_URL` (if needed) to Vercel's environment variables.
-   - This way, your application will use the key you've provided, and your friends can start chatting right away.
+   - **CloudGPT API Configuration**:
+     - `NEXT_PUBLIC_API_KEY`: Your CloudGPT API key (format: `cgpt_sk_...`)
+     - `NEXT_PUBLIC_API_URL`: CloudGPT base URL: `https://meridianlabsapp.website/v1`
+   - Get your CloudGPT API key from the [CloudGPT Dashboard](https://meridianlabsapp.website/dashboard)
+   - Refer to the `.env.example` file in the project root for the complete list of environment variables
+   - This way, your application will use CloudGPT's API with your provided key
 
 5. **Deploy**
    - Click "Deploy"
@@ -65,11 +68,14 @@ For deployment issues, check [Vercel Documentation](https://vercel.com/docs)
    - 构建命令：`pnpm build`（或保持默认）
    - 输出目录：`.next`（默认）
 
-4. **环境变量**（如需要）
+4. **环境变量**（CloudGPT API 必需）
    - 在 Vercel 项目的设置中添加环境变量。
-   - 如果您希望让朋友无需填写自己的 API 密钥即可使用您的应用，您需要配置服务器端的 API 密钥。
-   - 请参考项目根目录下的 `.env.example` 文件，将 `NEXT_PUBLIC_API_KEY` 和 `NEXT_PUBLIC_API_URL` (如果需要) 添加到 Vercel 的环境变量中。
-   - 这样，您的应用将使用您提供的密钥，朋友们就可以直接开始聊天了。
+   - **CloudGPT API 配置**:
+     - `NEXT_PUBLIC_API_KEY`: 您的CloudGPT API密钥（格式：`cgpt_sk_...`）
+     - `NEXT_PUBLIC_API_URL`: CloudGPT基础URL: `https://meridianlabsapp.website/v1`
+   - 从 [CloudGPT控制面板](https://meridianlabsapp.website/dashboard) 获取您的CloudGPT API密钥
+   - 请参考项目根目录下的 `.env.example` 文件，查看完整的环境变量列表
+   - 这样，您的应用将使用您提供的CloudGPT API密钥
 
 5. **部署**
    - 点击 "Deploy"
