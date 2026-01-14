@@ -301,6 +301,7 @@
   },
   "characterCardsPage": {
     "title": "Character Cards",
+    "createCharacter": "Create Character",
     "importCharacter": "Import Character",
     "importFirstCharacter": "Import Your First Character",
     "noCharacters": "You don't have any characters yet",
