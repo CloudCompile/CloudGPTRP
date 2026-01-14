@@ -106,10 +106,11 @@
 | :-------------- |
 
 **推荐API服务**:
-- **OpenAI**: 直接支持 OpenAI API 格式的模型。
-- **OpenRouter**: 推荐使用 [OpenRouter](https://openrouter.ai/) 统一访问多种模型。
-- **中转站部署**: 推荐 [new-api](https://github.com/QuantumNous/new-api)。
+- **CloudGPT**: 主要支持的API，提供159+模型。从 [CloudGPT控制面板](https://meridianlabsapp.website/dashboard) 获取您的API密钥。Base URL: `https://meridianlabsapp.website/v1`
+- **OpenAI兼容API**: 支持任何OpenAI兼容的API端点。
 - **本地部署**: 支持 Ollama、LM Studio 等本地推理服务。
+
+**NSFW内容**: 本应用程序在用户明确同意的情况下（仅限18岁以上）支持NSFW内容生成。
 
 | Narratium与其他AI角色扮演平台对比 |
 | :---------------------------------------- |

@@ -105,10 +105,11 @@ For Download Version: please refer to the [Download for Mac, Windows, Linux](htt
 | :-------------- |
 
 **Recommended API Services**:
-- **OpenAI**: Directly supports models using the OpenAI API format.
-- **OpenRouter**: Recommended to use [OpenRouter](https://openrouter.ai/) for unified access to various models.
-- **Relay Service Deployment**: Recommended [new-api](https://github.com/QuantumNous/new-api).
+- **CloudGPT**: Primary supported API with 159+ models. Get your API key from [CloudGPT Dashboard](https://meridianlabsapp.website/dashboard). Base URL: `https://meridianlabsapp.website/v1`
+- **OpenAI-Compatible APIs**: Supports any OpenAI-compatible API endpoint.
 - **Local Deployment**: Supports local inference services like Ollama, LM Studio, etc.
+
+**NSFW Content**: This application supports NSFW content generation when users provide explicit consent (18+ only).
 
 | Narratium vs. Other AI Roleplay Platforms |
 | :---------------------------------------- |
