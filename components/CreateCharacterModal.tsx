@@ -192,7 +192,7 @@ const CreateCharacterModal: React.FC<CreateCharacterModalProps> = ({
       await LocalCharacterRecordOperations.createCharacter(
         characterId,
         rawCharacterData,
-        imagePath
+        imagePath,
       );
       
       // Save avatar if provided
