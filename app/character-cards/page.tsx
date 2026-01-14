@@ -27,6 +27,7 @@ import React, { useState, useEffect } from "react";
 import { useLanguage } from "@/app/i18n";
 import { motion } from "framer-motion";
 import ImportCharacterModal from "@/components/ImportCharacterModal";
+import CreateCharacterModal from "@/components/CreateCharacterModal";
 import EditCharacterModal from "@/components/EditCharacterModal";
 import DownloadCharacterModal from "@/components/DownloadCharacterModal";
 import CharacterCardGrid from "@/components/CharacterCardGrid";
@@ -68,6 +69,7 @@ export default function CharacterCards() {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
   const [currentCharacter, setCurrentCharacter] = useState<Character | null>(null);
@@ -413,6 +415,34 @@ export default function CharacterCards() {
                     stiffness: 400, 
                     damping: 10, 
                   }}
+                  onClick={() => {
+                    trackButtonClick("create_character_btn", "Create Character");
+                    setIsCreateModalOpen(true);
+                  }}
+                >
+                  <span className="relative z-10 text-[#c0a480] group-hover:text-[#ffd475] transition-colors duration-300 text-xs sm:text-base">
+                    {t("characterCardsPage.createCharacter")}
+                  </span>
+                </motion.div>
+                <motion.div
+                  className={`portal-button relative overflow-hidden px-2 py-1.5 sm:px-4 sm:py-2 rounded-lg cursor-pointer ${fontClass}
+                    bg-gradient-to-b from-[#2a231c] to-[#1a1510]
+                    border border-[#534741]
+                    shadow-[0_0_15px_rgba(192,164,128,0.1)]
+                    hover:shadow-[0_0_20px_rgba(192,164,128,0.2)]
+                    before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-[rgba(192,164,128,0.1)] before:to-transparent
+                    before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700
+                    group`}
+                  whileHover={{ 
+                    scale: 1.01,
+                    boxShadow: "0 0 25px rgba(192,164,128,0.3)",
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ 
+                    type: "spring", 
+                    stiffness: 400, 
+                    damping: 10, 
+                  }}
                   onClick={() => setIsImportModalOpen(true)}
                 >
                   <span className="relative z-10 text-[#c0a480] group-hover:text-[#ffd475] transition-colors duration-300 text-xs sm:text-base">
@@ -503,6 +533,11 @@ export default function CharacterCards() {
             isOpen={isImportModalOpen}
             onClose={() => setIsImportModalOpen(false)}
             onImport={fetchCharacters}
+          />
+          <CreateCharacterModal
+            isOpen={isCreateModalOpen}
+            onClose={() => setIsCreateModalOpen(false)}
+            onCreate={fetchCharacters}
           />
           <DownloadCharacterModal
             isOpen={isDownloadModalOpen}

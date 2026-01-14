@@ -301,6 +301,7 @@
   },
   "characterCardsPage": {
     "title": "Character Cards",
+    "createCharacter": "Create Character",
     "importCharacter": "Import Character",
     "importFirstCharacter": "Import Your First Character",
     "noCharacters": "You don't have any characters yet",
@@ -908,8 +909,8 @@
     }
   },
   "tour": {
-    "welcome": "Welcome to Narratium",
-    "welcomeDescription": "Narratium is an intelligent character dialogue platform where you can have in-depth conversations with various AI characters and create unique story experiences. Let's explore the basic features.",
+    "welcome": "Welcome to CloudGPT RP",
+    "welcomeDescription": "CloudGPT RP is an intelligent AI roleplay platform where you can create characters, have in-depth conversations with AI, and generate images. Let's explore the basic features.",
     "loginTitle": "First, Login to Your Account",
     "loginDescription": "Click here to login. Note: The username you enter may be used by AI characters as the protagonist's name, so we recommend using a name you'd like to use in stories.",
     "settingsTitle": "Configure AI Model",
@@ -953,8 +954,8 @@
     "items": "items"
   },
   "appDownload": {
-    "title": "Download Narratium",
-    "subtitle": "Choose your platform to download the Narratium app:",
+    "title": "Download CloudGPT RP",
+    "subtitle": "Choose your platform to download the CloudGPT RP app:",
     "platforms": {
       "ios": "iOS",
       "android": "Android", 

@@ -18,31 +18,31 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"),
-  title: "Narratium - Interactive Storytelling Platform",
-  description: "Narratium is an innovative interactive storytelling platform that brings your stories to life. Create, share, and experience unique narratives in a fantasy-themed environment.",
-  keywords: "interactive storytelling, narrative platform, fantasy stories, creative writing, story creation",
-  authors: [{ name: "Narratium Team" }],
+  title: "CloudGPT RP - AI Roleplay Platform",
+  description: "CloudGPT RP is an innovative AI roleplay platform with character creation and image generation. Create characters, chat with AI, and generate images in your roleplay adventures.",
+  keywords: "AI roleplay, character creation, image generation, AI chat, interactive storytelling, CloudGPT",
+  authors: [{ name: "CloudGPT RP Team" }],
   manifest: "/manifest.json",
   openGraph: {
-    title: "Narratium - Interactive Storytelling Platform",
-    description: "Create and experience unique interactive stories in a fantasy-themed environment",
+    title: "CloudGPT RP - AI Roleplay Platform",
+    description: "Create characters, chat with AI, and generate images in your roleplay adventures",
     type: "website",
     locale: "en_US",
     alternateLocale: "zh_CN",
-    siteName: "Narratium",
+    siteName: "CloudGPT RP",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Narratium - Interactive Storytelling Platform",
+        alt: "CloudGPT RP - AI Roleplay Platform",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Narratium - Interactive Storytelling Platform",
-    description: "Create and experience unique interactive stories in a fantasy-themed environment",
+    title: "CloudGPT RP - AI Roleplay Platform",
+    description: "Create characters, chat with AI, and generate images in your roleplay adventures",
     images: ["/og-image.png"],
   },
   robots: {
