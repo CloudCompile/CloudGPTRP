@@ -12,6 +12,16 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: false,
   },
   devIndicators: false,
+  // Performance optimizations for low-power devices
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
+  experimental: {
+    // Optimize for smaller bundle size
+    optimizePackageImports: ["lucide-react", "framer-motion"],
+  },
+  // Reduce JavaScript bundle size
+  productionBrowserSourceMaps: false,
 };
 
 // Configure PWA settings

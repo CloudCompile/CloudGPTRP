@@ -5,6 +5,7 @@ import "./styles/fonts.css";
 import MainLayout from "@/components/MainLayout";
 import { LanguageProvider } from "@/app/i18n/LanguageProvider";
 import { SoundProvider } from "@/contexts/SoundContext";
+import { PerformanceProvider } from "@/contexts/PerformanceContext";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -88,11 +89,13 @@ export default function RootLayout({
     <html lang="zh" className="h-full">
       <body className="h-full bg-[#171717] text-white">
         <GoogleAnalytics />
-        <SoundProvider>
-          <LanguageProvider>
-            <MainLayout>{children}</MainLayout>
-          </LanguageProvider>
-        </SoundProvider>
+        <PerformanceProvider>
+          <SoundProvider>
+            <LanguageProvider>
+              <MainLayout>{children}</MainLayout>
+            </LanguageProvider>
+          </SoundProvider>
+        </PerformanceProvider>
         <Analytics />
       </body>
     </html>

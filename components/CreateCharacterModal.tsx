@@ -20,9 +20,8 @@
 
 "use client";
 
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useMemo } from "react";
 import { useLanguage } from "@/app/i18n";
-import { motion, AnimatePresence } from "framer-motion";
 import { trackButtonClick } from "@/utils/google-analytics";
 import { Toast } from "@/components/Toast";
 import ImageGenerationModal from "@/components/ImageGenerationModal";
@@ -162,8 +161,16 @@ const CreateCharacterModal: React.FC<CreateCharacterModalProps> = ({
       
       // Create the raw character data structure
       const rawCharacterData = {
-        spec: "chara_card_v2",
-        spec_version: "2.0",
+        id: characterId,
+        name: name.trim(),
+        description: description.trim(),
+        personality: personality.trim(),
+        scenario: scenario.trim(),
+        first_mes: firstMessage.trim() || `Hello, I'm ${name.trim()}.`,
+        mes_example: "",
+        creatorcomment: creatorComment.trim(),
+        avatar: imagePath,
+        sample_status: "normal",
         data: {
           name: name.trim(),
           description: description.trim(),
@@ -175,13 +182,13 @@ const CreateCharacterModal: React.FC<CreateCharacterModalProps> = ({
           system_prompt: "",
           post_history_instructions: "",
           alternate_greetings: [],
-          character_book: null,
+          character_book: {
+            entries: [],
+          },
           tags: [],
           creator: "",
           character_version: "1.0",
-          extensions: {},
         },
-        creatorcomment: creatorComment.trim(),
       };
 
       // Import the character creation function
@@ -219,192 +226,180 @@ const CreateCharacterModal: React.FC<CreateCharacterModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60" onClick={onClose}>
+      <div
+        className={`relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-[#1a1410] rounded-lg shadow-2xl border border-[#534741] ${fontClass}`}
+        onClick={(e) => e.stopPropagation()}
       >
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.9, opacity: 0 }}
-          transition={{ type: "spring", duration: 0.3 }}
-          className={`relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-[#1a1410] rounded-lg shadow-2xl border border-[#534741] ${fontClass}`}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="sticky top-0 z-10 bg-[#1a1410] border-b border-[#534741] p-6">
-            <h2 className={`text-2xl font-bold text-[#f4e8c1] mb-2 ${serifFontClass}`}>
+        <div className="sticky top-0 z-10 bg-[#1a1410] border-b border-[#534741] p-6">
+          <h2 className={`text-2xl font-bold text-[#f4e8c1] mb-2 ${serifFontClass}`}>
               Create Character from Scratch
-            </h2>
-            <p className="text-[#c0a480] text-sm">
+          </h2>
+          <p className="text-[#c0a480] text-sm">
               Fill in the details to create your custom character
-            </p>
-          </div>
+          </p>
+        </div>
 
-          <form onSubmit={handleSubmit} className="p-6 space-y-6">
-            {/* Avatar Upload Section */}
-            <div className="flex flex-col items-center space-y-4">
-              <div className="w-32 h-32 rounded-full overflow-hidden bg-[#252220] border-2 border-[#534741] flex items-center justify-center">
-                {avatarPreview ? (
-                  <img src={avatarPreview} alt="Avatar preview" className="w-full h-full object-cover" />
-                ) : (
-                  <span className="text-[#c0a480] text-sm text-center px-4">No avatar</span>
-                )}
-              </div>
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => fileInputRef.current?.click()}
-                  className="px-4 py-2 bg-[#252220] hover:bg-[#342f25] text-[#f4e8c1] rounded border border-[#534741] transition-colors"
-                >
-                  Upload Avatar
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    trackButtonClick("generate_avatar_btn", "Generate Avatar");
-                    setIsImageGenModalOpen(true);
-                  }}
-                  className="px-4 py-2 bg-[#f9c86d] hover:bg-[#f4d68f] text-[#1a1410] font-semibold rounded transition-colors"
-                >
-                  Generate Avatar
-                </button>
-              </div>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handleAvatarUpload}
-                className="hidden"
-              />
+        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+          {/* Avatar Upload Section */}
+          <div className="flex flex-col items-center space-y-4">
+            <div className="w-32 h-32 rounded-full overflow-hidden bg-[#252220] border-2 border-[#534741] flex items-center justify-center">
+              {avatarPreview ? (
+                <img src={avatarPreview} alt="Avatar preview" className="w-full h-full object-cover" />
+              ) : (
+                <span className="text-[#c0a480] text-sm text-center px-4">No avatar</span>
+              )}
             </div>
-
-            {/* Character Name */}
-            <div>
-              <label className="block text-[#f4e8c1] mb-2">
-                Character Name <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-2 bg-[#252220] text-[#f4e8c1] border border-[#534741] rounded focus:outline-none focus:border-[#f9c86d]"
-                placeholder="Enter character name"
-                required
-              />
-            </div>
-
-            {/* Description */}
-            <div>
-              <label className="block text-[#f4e8c1] mb-2">
-                Description
-              </label>
-              <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                rows={3}
-                className="w-full px-4 py-2 bg-[#252220] text-[#f4e8c1] border border-[#534741] rounded focus:outline-none focus:border-[#f9c86d] resize-none"
-                placeholder="Brief description of the character's appearance and traits"
-              />
-            </div>
-
-            {/* Personality */}
-            <div>
-              <label className="block text-[#f4e8c1] mb-2">
-                Personality <span className="text-red-500">*</span>
-              </label>
-              <textarea
-                value={personality}
-                onChange={(e) => setPersonality(e.target.value)}
-                rows={4}
-                className="w-full px-4 py-2 bg-[#252220] text-[#f4e8c1] border border-[#534741] rounded focus:outline-none focus:border-[#f9c86d] resize-none"
-                placeholder="Describe the character's personality traits, behaviors, and quirks"
-                required
-              />
-            </div>
-
-            {/* Scenario */}
-            <div>
-              <label className="block text-[#f4e8c1] mb-2">
-                Scenario
-              </label>
-              <textarea
-                value={scenario}
-                onChange={(e) => setScenario(e.target.value)}
-                rows={3}
-                className="w-full px-4 py-2 bg-[#252220] text-[#f4e8c1] border border-[#534741] rounded focus:outline-none focus:border-[#f9c86d] resize-none"
-                placeholder="The setting or context where conversations take place"
-              />
-            </div>
-
-            {/* First Message */}
-            <div>
-              <label className="block text-[#f4e8c1] mb-2">
-                First Message
-              </label>
-              <textarea
-                value={firstMessage}
-                onChange={(e) => setFirstMessage(e.target.value)}
-                rows={3}
-                className="w-full px-4 py-2 bg-[#252220] text-[#f4e8c1] border border-[#534741] rounded focus:outline-none focus:border-[#f9c86d] resize-none"
-                placeholder="The character's greeting message (optional, will auto-generate if empty)"
-              />
-            </div>
-
-            {/* Creator Comment */}
-            <div>
-              <label className="block text-[#f4e8c1] mb-2">
-                Creator Notes
-              </label>
-              <textarea
-                value={creatorComment}
-                onChange={(e) => setCreatorComment(e.target.value)}
-                rows={2}
-                className="w-full px-4 py-2 bg-[#252220] text-[#f4e8c1] border border-[#534741] rounded focus:outline-none focus:border-[#f9c86d] resize-none"
-                placeholder="Optional notes about this character"
-              />
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex justify-end space-x-3 pt-4 border-t border-[#534741]">
+            <div className="flex gap-2">
               <button
                 type="button"
-                onClick={onClose}
-                disabled={isLoading}
-                className="px-6 py-2 bg-[#252220] hover:bg-[#342f25] text-[#f4e8c1] rounded border border-[#534741] transition-colors disabled:opacity-50"
+                onClick={() => fileInputRef.current?.click()}
+                className="px-4 py-2 bg-[#252220] hover:bg-[#342f25] text-[#f4e8c1] rounded border border-[#534741] transition-colors"
               >
-                Cancel
+                  Upload Avatar
               </button>
               <button
-                type="submit"
-                disabled={isLoading}
-                className="px-6 py-2 bg-[#f9c86d] hover:bg-[#f4d68f] text-[#1a1410] font-semibold rounded transition-colors disabled:opacity-50"
+                type="button"
+                onClick={() => {
+                  trackButtonClick("generate_avatar_btn", "Generate Avatar");
+                  setIsImageGenModalOpen(true);
+                }}
+                className="px-4 py-2 bg-[#f9c86d] hover:bg-[#f4d68f] text-[#1a1410] font-semibold rounded transition-colors"
               >
-                {isLoading ? "Creating..." : "Create Character"}
+                  Generate Avatar
               </button>
             </div>
-          </form>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleAvatarUpload}
+              className="hidden"
+            />
+          </div>
 
-          <Toast
-            type={toast.type}
-            message={toast.message}
-            isVisible={toast.isVisible}
-            onClose={hideToast}
-          />
-        </motion.div>
-        
-        <ImageGenerationModal
-          isOpen={isImageGenModalOpen}
-          onClose={() => setIsImageGenModalOpen(false)}
-          onImageGenerated={handleImageGenerated}
-          suggestedPrompt={name && description ? `${description} - character portrait` : ""}
-          title="Generate Character Avatar"
+          {/* Character Name */}
+          <div>
+            <label className="block text-[#f4e8c1] mb-2">
+                Character Name <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full px-4 py-2 bg-[#252220] text-[#f4e8c1] border border-[#534741] rounded focus:outline-none focus:border-[#f9c86d]"
+              placeholder="Enter character name"
+              required
+            />
+          </div>
+
+          {/* Description */}
+          <div>
+            <label className="block text-[#f4e8c1] mb-2">
+                Description
+            </label>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows={3}
+              className="w-full px-4 py-2 bg-[#252220] text-[#f4e8c1] border border-[#534741] rounded focus:outline-none focus:border-[#f9c86d] resize-none"
+              placeholder="Brief description of the character's appearance and traits"
+            />
+          </div>
+
+          {/* Personality */}
+          <div>
+            <label className="block text-[#f4e8c1] mb-2">
+                Personality <span className="text-red-500">*</span>
+            </label>
+            <textarea
+              value={personality}
+              onChange={(e) => setPersonality(e.target.value)}
+              rows={4}
+              className="w-full px-4 py-2 bg-[#252220] text-[#f4e8c1] border border-[#534741] rounded focus:outline-none focus:border-[#f9c86d] resize-none"
+              placeholder="Describe the character's personality traits, behaviors, and quirks"
+              required
+            />
+          </div>
+
+          {/* Scenario */}
+          <div>
+            <label className="block text-[#f4e8c1] mb-2">
+                Scenario
+            </label>
+            <textarea
+              value={scenario}
+              onChange={(e) => setScenario(e.target.value)}
+              rows={3}
+              className="w-full px-4 py-2 bg-[#252220] text-[#f4e8c1] border border-[#534741] rounded focus:outline-none focus:border-[#f9c86d] resize-none"
+              placeholder="The setting or context where conversations take place"
+            />
+          </div>
+
+          {/* First Message */}
+          <div>
+            <label className="block text-[#f4e8c1] mb-2">
+                First Message
+            </label>
+            <textarea
+              value={firstMessage}
+              onChange={(e) => setFirstMessage(e.target.value)}
+              rows={3}
+              className="w-full px-4 py-2 bg-[#252220] text-[#f4e8c1] border border-[#534741] rounded focus:outline-none focus:border-[#f9c86d] resize-none"
+              placeholder="The character's greeting message (optional, will auto-generate if empty)"
+            />
+          </div>
+
+          {/* Creator Comment */}
+          <div>
+            <label className="block text-[#f4e8c1] mb-2">
+                Creator Notes
+            </label>
+            <textarea
+              value={creatorComment}
+              onChange={(e) => setCreatorComment(e.target.value)}
+              rows={2}
+              className="w-full px-4 py-2 bg-[#252220] text-[#f4e8c1] border border-[#534741] rounded focus:outline-none focus:border-[#f9c86d] resize-none"
+              placeholder="Optional notes about this character"
+            />
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex justify-end space-x-3 pt-4 border-t border-[#534741]">
+            <button
+              type="button"
+              onClick={onClose}
+              disabled={isLoading}
+              className="px-6 py-2 bg-[#252220] hover:bg-[#342f25] text-[#f4e8c1] rounded border border-[#534741] transition-colors disabled:opacity-50"
+            >
+                Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="px-6 py-2 bg-[#f9c86d] hover:bg-[#f4d68f] text-[#1a1410] font-semibold rounded transition-colors disabled:opacity-50"
+            >
+              {isLoading ? "Creating..." : "Create Character"}
+            </button>
+          </div>
+        </form>
+
+        <Toast
+          type={toast.type}
+          message={toast.message}
+          isVisible={toast.isVisible}
+          onClose={hideToast}
         />
-      </motion.div>
-    </AnimatePresence>
+      </div>
+      
+      <ImageGenerationModal
+        isOpen={isImageGenModalOpen}
+        onClose={() => setIsImageGenModalOpen(false)}
+        onImageGenerated={handleImageGenerated}
+        suggestedPrompt={name && description ? `${description} - character portrait` : ""}
+        title="Generate Character Avatar"
+      />
+    </div>
   );
 };
 

@@ -196,5 +196,39 @@ input[type="text"]:-webkit-autofill {
   overflow: hidden;
 }
 
+/* Performance mode - Reduced motion */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+.reduce-motion {
+  --animation-duration: 0ms;
+}
+
+.reduce-motion .animate-gradient-x {
+  animation: none;
+}
+
+/* Low power mode optimizations */
+.reduce-motion button,
+.reduce-motion .button {
+  transition: none;
+}
+
+.reduce-motion a {
+  transition: none;
+}
+
+.reduce-motion input,
+.reduce-motion textarea,
+.reduce-motion select {
+  transition: none;
+}
+
 /* Creator area responsive styles */
 
